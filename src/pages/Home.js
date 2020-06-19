@@ -25,7 +25,10 @@ export default class Home extends Component {
     }
   }
   render() {
-    let user = {}
+    let user = {
+      email: '',
+      password: '',
+    }
     user = JSON.parse(localStorage.getItem('token'))
     return (
       <Container>
