@@ -11,6 +11,10 @@ const Container = styled(OriginalContainer)`
 export default class Home extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
     this.logout = this.logout.bind(this)
   }
 
@@ -24,15 +28,16 @@ export default class Home extends Component {
       this.props.history.push('/login', {error: 'You must be loggin first!'})
     }
   }
-  render() {
-    let user = {
-      email: '',
-      password: '',
+  componentDidMount(){
+    if(localStorage.getItem('token')){
+      this.setState(JSON.parse(localStorage.getItem('token')))
     }
-    user = JSON.parse(localStorage.getItem('token'))
+  }
+  render() {
+    let {email} = this.state
     return (
       <Container>
-        <h1>Hello {user.email}!</h1>
+        <h1>Hello {email}!</h1>
         <Button onClick={this.logout}>Logout</Button>
       </Container>
     )
